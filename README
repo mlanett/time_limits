@@ -1,0 +1,17 @@
+Apply timeouts to methods via meta programming
+
+Usage:
+
+class Foo
+
+  def my_possibly_slow_method() sleep(rand 10); end
+  def my_possibly_slow_query() sleep(rand 10); rand; end
+  
+  include TimeLimits
+  time_limit 1.second, :my_possibly_slow_method
+  time_limit 1.second, :my_possibly_slow_method, :return => false
+
+end
+
+a = Foo.new.my_possibly_slow_method # may throw Timeout
+b = Foo.new.my_possibly_slow_query # may return false
