@@ -8,16 +8,23 @@ module TimeLimits
     
     if RUBY_VERSION =~ /^1\.8/ then
       
-      def timeout( duration = 1, &block )
+      def in_time( duration = 1, &block )
         SystemTimer.timeout_after(duration) { yield }
       end
     
     else
       
-      def timeout( duration = 1, &block )
+      def in_time( duration = 1, &block )
         Timeout::timeout(duration) { yield }
       end
       
+    end
+    
+    # options :return value
+    def in_time_or_else( duration = 1, options = {}, &block )
+      in_time( duration, &block )
+    rescue ::Timeout::Error => x
+      return options[:return]
     end
     
     extend Timeout
