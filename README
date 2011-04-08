@@ -9,7 +9,7 @@ class Foo
   
   include TimeLimits
   time_limit 1.second, :my_possibly_slow_method
-  time_limit 1.second, :my_possibly_slow_method, :return => false
+  time_limit 1.second, :my_possibly_slow_method, :rescue => false
 
 end
 

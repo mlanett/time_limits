@@ -9,6 +9,6 @@ rescue Timeout::Error => x
   puts "Ok"
 end
 
-ok = TimeLimits::Timeout.in_time_or_else( 1, :return => true ) { sleep 2 }
-raise unless ok == true
+ok = TimeLimits::Timeout.in_time_or_else( 1, :rescue => false ) { sleep 2 }
+raise unless ok == false
 puts "Ok"
