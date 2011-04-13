@@ -15,7 +15,7 @@ module TimeLimits
     else
       
       def in_time( duration = 1, &block )
-        Timeout::timeout(duration) { yield }
+        ::Timeout::timeout(duration) { yield }
       end
       
     end
